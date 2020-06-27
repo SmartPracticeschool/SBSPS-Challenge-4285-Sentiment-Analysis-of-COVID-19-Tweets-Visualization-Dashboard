@@ -1,10 +1,22 @@
 from django.shortcuts import render
 from .CommentsAnalyzer import comment_analyzer
-# Create your views here.
+import json
+
 
 def index(request):
-    template_name = 'generalTwitter.html'
-    return render(request,template_name)
+    
+    x = [
+			['Country', 'Popularity'],
+			['Germany', 200],
+			['United States', 300],
+			['Brazil', 400],
+			['Canada', 500],
+			['France', 600],
+			['RU', 700]
+			]
+    args = {'arr':json.dumps(x),'name':"Jaswanth"}
+    template_name = 'IBM_home.html'
+    return render(request,template_name,args)
 
 def analysis(request):
     link = request.POST['link']

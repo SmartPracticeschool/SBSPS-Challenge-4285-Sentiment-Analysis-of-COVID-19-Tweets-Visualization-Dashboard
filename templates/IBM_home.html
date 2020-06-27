@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  var myMapsApiKey = 'AIzaSyCIa61BV_5QCDZ6KjE1Gffv38MdfO2GeXQ';
+  google.charts.load('current', {'packages':['geochart', 'calendar', 'corechart'],'mapsApiKey': 'myMapsApiKey'});
+  google.charts.setOnLoadCallback(drawRegionsMap);
+    function drawRegionsMap() {
+		var djangoData = JSON.parse('{{arr|safe}}');
+        var data_geo = google.visualization.arrayToDataTable(djangoData);
+		var dataTable_cal = new google.visualization.DataTable();
+			dataTable_cal.addColumn({ type: 'date', id: 'Date' });
+			dataTable_cal.addColumn({ type: 'number', id: 'Won/Loss' });
+			dataTable_cal.addRows([
+    		  [ new Date(2012, 3, 13), 36032 ],
+			  [ new Date(2012, 3, 14), 38024 ],
+			  [ new Date(2012, 3, 15), 38024 ],
+			  [ new Date(2012, 3, 16), 38108 ],
+			  [ new Date(2012, 3, 17), 38229 ],
+			  // Many rows omitted for brevity.
+			  [ new Date(2013, 9, 4), 38177 ],
+			  [ new Date(2013, 9, 5), 38705 ],
+			  [ new Date(2013, 9, 12), 38210 ],
+			  [ new Date(2013, 9, 13), 38029 ],
+			  [ new Date(2013, 9, 19), 38823 ],
+			  [ new Date(2013, 9, 23), 38345 ],
+			  [ new Date(2013, 9, 24), 38436 ],
+			  [ new Date(2013, 9, 30), 38447 ]
+			]);
+		var data_overall = google.visualization.arrayToDataTable([
+          ['Sentiment', 'Percentage'],
+          ['+ve',      10],
+          ['-ve',      40],
+          ['neutral',  50],
+        ]);
+
+        var options = {};
+		var options_oa = {pieHole: 0.4,};
+        var chart1 = new google.visualization.GeoChart(document.getElementById('regions_div'));
+		var chart2 = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+		var chart3 = new google.visualization.PieChart(document.getElementById('pie_oa'));
+
+        chart1.draw(data_geo, options);
+		chart2.draw(dataTable_cal, options);
+		chart3.draw(data_overall, options_oa);
+	}
+</script>
+
+<style>
+.headerimg{background-image: url("https://wallpapercave.com/wp/krHJs8F.jpg")}
+.middle{
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	ms-transform:translate(-50%,-50%)
+}
+.center1 {
+  margin: auto;
+  width: 63%;
+  border: 3px solid green;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+
+div.ex1 {
+  position:relative;
+  width:100%;
+  left:17%;
+
+}
+</style>
+</head>
+
+<body>
+<section>
+    <div style="background-color: burlywood;" id="main">
+        <h1 class="display-1">COVID-19 Sentiment Analysis</h1>
+    </div>
+    
+    <div id="World">
+        <h1 class="display-3">World Sentiment</h1>
+        <div id="regions_div" class="container-fluid"></div>
+    </div>
+    {{arr}}
+    <div  class="container-fluid" id="Lockdown">
+        <h1 class="display-3">{{name}}Lockdown Sentiment</h1>
+		<!---height = 43+142*number of years  px--->
+		<div style="border: 2px solid black;position: relative;height: 185px;" id="calendar_basic" class="container-fluid center1"></div>
+    </div>
+    
+    <div id="overall">
+        <h1 class="display-3">overall sentiment</h1>
+		<div style="border: 2px solid black;position: relative;height: 185px;" id="pie_oa" class="container-fluid center1"></div>
+    </div>
+    
+    <div id="Team">
+        <h1 class="display-3">The Team</h1>
+    </div>
+</section>
+</body>
+</html>
