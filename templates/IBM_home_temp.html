@@ -29,7 +29,7 @@
           ['France', 600],
           ['RU', 700]
         ]);
-
+		var dataTable_cal = new google.visualization.DataTable();
 			dataTable_cal.addColumn({ type: 'date', id: 'Date' });
 			dataTable_cal.addColumn({ type: 'number', id: 'Won/Loss' });
 			dataTable_cal.addRows([
@@ -55,15 +55,15 @@
           ['neutral',  50],
         ]);
 
-        var options = {};
-		var options_oa = {pieHole: 0.4,};
-    var chart1 = new google.visualization.GeoChart(document.getElementById('world'));
-		var chart2 = new google.visualization.Calendar(document.getElementById('lockdown'));
-		var chart3 = new google.visualization.PieChart(document.getElementById('overall'));
+    var options = {};
+	var options_oa = {pieHole: 0.4,};
+    var chart1 = new google.visualization.GeoChart(document.getElementById('regions_div'));
+	var chart2 = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+	var chart3 = new google.visualization.PieChart(document.getElementById('pie_oa'));
 
     chart1.draw(data_geo_t, options);
-		chart2.draw(dataTable_cal, options);
-		chart3.draw(data_overall, options_oa);
+	chart2.draw(dataTable_cal, options);
+	chart3.draw(data_overall, options_oa);
 	}
 </script>
 
