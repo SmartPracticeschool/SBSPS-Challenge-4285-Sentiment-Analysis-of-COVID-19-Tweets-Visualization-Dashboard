@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS Template</title>
+<title>Covid Sentiments</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -57,9 +57,9 @@
 
         var options = {};
 		var options_oa = {pieHole: 0.4,};
-    var chart1 = new google.visualization.GeoChart(document.getElementById('regions_div'));
-		var chart2 = new google.visualization.Calendar(document.getElementById('calendar_basic'));
-		var chart3 = new google.visualization.PieChart(document.getElementById('pie_oa'));
+    var chart1 = new google.visualization.GeoChart(document.getElementById('world'));
+		var chart2 = new google.visualization.Calendar(document.getElementById('lockdown'));
+		var chart3 = new google.visualization.PieChart(document.getElementById('overall'));
 
     chart1.draw(data_geo_t, options);
 		chart2.draw(dataTable_cal, options);
@@ -69,13 +69,7 @@
 
 <style>
 .headerimg{background-image: url("https://wallpapercave.com/wp/krHJs8F.jpg")}
-.middle{
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform:translate(-50%,-50%);
-	ms-transform:translate(-50%,-50%)
-}
+
 .center1 {
   margin: auto;
   width: 63%;
@@ -109,15 +103,14 @@ div.ex1 {
         <h1 class="display-3">World Sentiment</h1>
         <div id="regions_div" class="container-fluid"></div>
     </div>
-    {{arr}}
     <div  class="container-fluid" id="Lockdown">
-        <h1 class="display-3">{{name}}Lockdown Sentiment</h1>
-		<!---height = 43+142*number of years  px--->
+        <h1 class="display-3">Lockdown Sentiment</h1>
+		<!--height = 43+142*number of years  px -->
 		<div style="border: 2px solid black;position: relative;height: 185px;" id="calendar_basic" class="container-fluid center1"></div>
     </div>
     
     <div id="overall">
-        <h1 class="display-3">overall sentiment</h1>
+        <h1 class="display-3">Overall sentiment</h1>
 		<div style="border: 2px solid black;position: relative;height: 185px;" id="pie_oa" class="container-fluid center1"></div>
     </div>
     
